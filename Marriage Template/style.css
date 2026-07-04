@@ -271,10 +271,12 @@ span {
 
 .micro-nav {
   display: inline-flex;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: 100%;
   justify-content: center;
   gap: .3rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   padding: .28rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, .12);
@@ -579,14 +581,7 @@ h2,
 }
 
 .foil-sheen {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background:
-    linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, .34) 32%, rgba(255, 238, 190, .28) 42%, transparent 58%),
-    linear-gradient(180deg, rgba(255, 255, 255, .12), transparent 35%, rgba(122, 21, 34, .08));
-  mix-blend-mode: screen;
+  display: none;
 }
 
 .scratch-content {
@@ -658,15 +653,20 @@ h2,
   z-index: 5;
   width: auto;
   max-width: calc(100% - 2rem);
+  min-height: 48px;
+  padding: .85rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--chip-bg);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: .95rem;
 }
 
 .scratch-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  cursor: grab;
+  display: none;
 }
 
 .scratch-card.is-cleared .scratch-canvas,
@@ -674,11 +674,6 @@ h2,
 .scratch-card.is-cleared .scratch-hint {
   opacity: 0;
   pointer-events: none;
-  transition: opacity .45s ease;
-}
-
-.scratch-card.is-cleared .foil-sheen {
-  opacity: .25;
   transition: opacity .45s ease;
 }
 
@@ -847,16 +842,6 @@ h2,
 }
 
 @media (max-width: 768px) {
-
-  .desktop-reveal,
-  .hint-desktop {
-    display: none;
-  }
-
-  .hint-mobile {
-    display: block;
-  }
-
   .scratch-content {
     padding-bottom: 4.8rem;
   }
