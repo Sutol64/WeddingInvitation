@@ -205,7 +205,7 @@ span {
   min-height: 70px;
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: .75rem;
   padding: .6rem .9rem;
 }
 
@@ -281,6 +281,7 @@ span {
   border-radius: 999px;
   background: rgba(255, 255, 255, .12);
   border: 1px solid var(--line);
+  margin-left: auto;
 }
 
 .micro-nav a {
@@ -309,7 +310,6 @@ span {
   background: var(--chip-bg);
   color: var(--chip-text);
   cursor: pointer;
-  margin-left: auto;
   transition: background .25s ease, color .25s ease,
     transform .25s cubic-bezier(.16, 1, .3, 1),
     box-shadow .25s cubic-bezier(.16, 1, .3, 1);
@@ -467,9 +467,23 @@ h2,
 .muhurtham-band {
   margin-top: 1.3rem;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  align-items: stretch;
   gap: .7rem;
   padding: .7rem;
+}
+
+.muhurtham-band>div {
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.muhurtham-band>div:last-child {
+  grid-column: 1 / -1;
 }
 
 .muhurtham-band>div,
