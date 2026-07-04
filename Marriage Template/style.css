@@ -337,6 +337,26 @@ span {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(255, 250, 245, 0.96) 0%, rgba(255, 250, 245, 0.88) 38%, rgba(255, 250, 245, 0.58) 62%, rgba(255, 250, 245, 0.22) 100%);
+}
+
+[data-theme="dark"] .hero-card {
+  background:
+    linear-gradient(90deg, rgba(23, 16, 15, 0.96) 0%, rgba(23, 16, 15, 0.86) 38%, rgba(23, 16, 15, 0.56) 62%, rgba(23, 16, 15, 0.18) 100%);
+}
+
+.hero-tree {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 0;
+  width: min(70%, 550px);
+  height: auto;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  filter: saturate(0.92) contrast(0.98);
 }
 
 .deity-outline {
@@ -856,8 +876,28 @@ h2,
 }
 
 @media (max-width: 768px) {
-  .scratch-content {
-    padding-bottom: 4.8rem;
+  .hero-card {
+    background:
+      linear-gradient(180deg, rgba(255, 250, 245, 0.96) 0%, rgba(255, 250, 245, 0.9) 34%, rgba(255, 250, 245, 0.74) 58%, rgba(255, 250, 245, 0.56) 100%);
+  }
+
+  .hero-card::before {
+    background-size: 72%;
+    background-position: center bottom;
+    opacity: 0.9;
+  }
+
+  [data-theme="dark"] .hero-card {
+    background:
+      linear-gradient(180deg, rgba(23, 16, 15, 0.96) 0%, rgba(23, 16, 15, 0.9) 34%, rgba(23, 16, 15, 0.74) 58%, rgba(23, 16, 15, 0.58) 100%);
+  }
+
+  .hero-tree {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 0;
+    width: min(72%, 280px);
+    opacity: 0.28;
   }
 }
 
