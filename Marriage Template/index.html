@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tamil Wedding Invitation | Megha & Thamil</title>
   <meta name="description"
-    content="Tamil wedding invitation for Megha and Thamil with premium date reveal, Ganesh blessing motif, and live countdown." />
+    content="Tamil wedding invitation for Megha and Thamil with immersive date reveal, Ganesh blessing motif, and live countdown." />
   <meta property="og:title" content="Megha & Thamil Wedding Invitation" />
   <meta property="og:type" content="event" />
   <meta property="og:description" content="Join us for the sacred wedding ceremony of Megha and Thamil." />
@@ -55,12 +55,11 @@
       </a>
 
       <nav class="micro-nav" aria-label="Primary">
-        <a href="#countdown">Countdown</a>
-        <a href="#reveal">Date Reveal</a>
-        <a href="#couple">Couple</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#venue">Venue</a>
-        <a href="#rsvp">RSVP</a>
+        <a href="#reveal" data-nav="reveal">Date reveal</a>
+        <a href="#couple" data-nav="couple">Couple</a>
+        <a href="#timeline" data-nav="timeline">Timeline</a>
+        <a href="#venue" data-nav="venue">Venue</a>
+        <a href="#rsvp" data-nav="rsvp">RSVP</a>
       </nav>
 
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">☀</button>
@@ -74,7 +73,7 @@
         <article class="hero-card liquid-panel reveal">
           <div class="hero-topline">
             <span class="eyebrow tamil">ஸ்ரீ பிள்ளையார் சுபமுகம்</span>
-            <span class="liquid-chip date-chip">Wednesday · 26 August 2026</span>
+            <span class="hero-tag">Sacred wedding ceremony</span>
           </div>
           <p class="hero-kicker">With the blessings of Lord Ganesha</p>
           <h1>We invite you to bless the wedding of <span>Megha</span> & <span>Thamil</span>.</h1>
@@ -83,23 +82,8 @@
             அழைக்கிறோம்.</p>
 
           <div class="hero-actions">
-            <a class="button primary" href="#reveal">Reveal wedding date</a>
+            <a class="button primary" href="#reveal">View wedding details</a>
             <a class="button secondary" href="#venue">View directions</a>
-          </div>
-
-          <div class="muhurtham-band liquid-strip">
-            <div>
-              <span class="meta">Tamil date</span>
-              <strong>ஆவணி 11, 2026</strong>
-            </div>
-            <div>
-              <span class="meta">Muhurtham</span>
-              <strong>5:12 AM – 5:48 AM</strong>
-            </div>
-            <div>
-              <span class="meta">Venue</span>
-              <strong>Sri Lakshmi Hall, Mumbai</strong>
-            </div>
           </div>
         </article>
 
@@ -113,21 +97,34 @@
               <div><strong data-unit="minutes">00</strong><span>Minutes</span></div>
               <div><strong data-unit="seconds">00</strong><span>Seconds</span></div>
             </div>
-            <p class="countdown-note">Live countdown to Wednesday, 26 August 2026 at 5:12 AM IST.</p>
           </section>
 
           <section class="scratch-shell liquid-panel reveal" id="reveal" aria-labelledby="scratch-title">
-            <span class="card-label" id="scratch-title">Premium date reveal</span>
             <div class="scratch-card" data-scratch-card>
               <div class="foil-sheen" aria-hidden="true"></div>
               <div class="scratch-content" aria-live="polite">
                 <p class="scratch-label">Sacred date / முகூர்த்த நாள்</p>
-                <h3>26 August 2026</h3>
-                <p>Wednesday · ஆவணி 11, 2026 · 5:12 AM – 5:48 AM</p>
+                <div class="scratch-date">
+                  <h3>26 August 2026</h3>
+                  <p>Wednesday · ஆவணி 11, 2026 · 5:12 AM – 5:48 AM</p>
+                </div>
+                <div class="muhurtham-band">
+                  <div>
+                    <span class="meta">தமிழ் தேதி</span>
+                    <strong>ஆவணி 11, 2026</strong>
+                  </div>
+                  <div>
+                    <span class="meta">Muhurtham / முகூர்த்த நேரம்</span>
+                    <strong>5:12 AM – 5:48 AM</strong>
+                  </div>
+                  <div>
+                    <span class="meta">Venue / இடம்</span>
+                    <strong>Sri Lakshmi Hall, Coimbatore</strong>
+                  </div>
+                </div>
               </div>
-              <div class="scratch-hint hint-desktop">Click the gold seal to reveal the wedding date</div>
               <div class="scratch-hint hint-mobile">Scratch the gold foil to reveal the wedding date</div>
-              <button class="desktop-reveal button secondary" type="button">Click to reveal date</button>
+              <button class="desktop-reveal button secondary" type="button">Reveal wedding date</button>
               <canvas class="scratch-canvas" width="640" height="360"
                 aria-label="Scratch to reveal the wedding date"></canvas>
             </div>
@@ -141,7 +138,8 @@
         <div class="section-heading centered reveal">
           <span class="eyebrow">Bride & Groom</span>
           <h2>The two families who welcome you.</h2>
-          <p>Restored couple information, hometown details, family names, and quick contact references for guests.</p>
+          <p>திருமண மணமக்களை பற்றிய விவரங்கள், குடும்ப தகவல்கள், ஊர் விவரங்கள் மற்றும் விரைவான தொடர்பு விவரங்கள்
+            விருந்தினர்களுக்காக.</p>
         </div>
         <div class="people-grid">
           <article class="person-card liquid-panel reveal">
@@ -249,8 +247,8 @@
 
   <footer class="site-footer">
     <div class="container footer-inner liquid-strip">
-      <p>Vaazhga Valamudan</p>
-      <p>Desktop click reveal, mobile scratch reveal, restored couple details, and venue directions.</p>
+      <p>வாழ்க வளமுடன்</p>
+      <p class="tamil">நன்றி</p>
     </div>
   </footer>
 
