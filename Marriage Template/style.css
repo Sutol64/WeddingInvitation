@@ -85,6 +85,10 @@ body {
     linear-gradient(180deg, #201716 0%, var(--bg) 22%, var(--bg) 100%);
 }
 
+[data-theme="dark"] .deity-outline {
+  opacity: .1;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -334,23 +338,18 @@ span {
 }
 
 .deity-outline {
-  position: absolute;
-  top: 4vh;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: min(74vw, 680px);
   height: min(92vh, 860px);
   z-index: 0;
-  opacity: .92;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--gold) 38%, transparent), color-mix(in srgb, var(--primary) 26%, transparent));
-  -webkit-mask-image: url('./assets/images/ganesha-outline.svg');
-  mask-image: url('./assets/images/ganesha-outline.svg');
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center top;
-  mask-position: center top;
-  -webkit-mask-size: contain;
-  mask-size: contain;
+  opacity: .18;
+  background-image: url('./lord-ganesha-vector-34.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   filter: drop-shadow(0 10px 30px rgba(122, 21, 34, .12));
   pointer-events: none;
 }
