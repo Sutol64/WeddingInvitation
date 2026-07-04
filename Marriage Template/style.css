@@ -652,9 +652,12 @@ h2,
 
 .desktop-reveal {
   position: absolute;
-  inset: auto 1rem 1rem 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 5;
-  width: calc(100% - 2rem);
+  width: auto;
+  max-width: calc(100% - 2rem);
 }
 
 .scratch-canvas {
