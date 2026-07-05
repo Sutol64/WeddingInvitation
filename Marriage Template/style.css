@@ -365,7 +365,7 @@ span {
   inset: 0;
   margin: auto;
   width: min(74vw, 680px);
-  height: min(92vh, 860px);
+  height: min(92svh, 860px);
   z-index: 0;
   opacity: .18;
   background-image: url('./lord-ganesha-vector-34.png');
