@@ -58,6 +58,7 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -640,27 +641,23 @@ h2,
   color: var(--ink);
 }
 
-.scratch-date,
-.muhurtham-band {
-  transition: opacity .6s cubic-bezier(.16, 1, .3, 1),
-    transform .6s cubic-bezier(.16, 1, .3, 1),
-    filter .6s cubic-bezier(.16, 1, .3, 1);
-}
-
 .scratch-card:not(.is-cleared) .scratch-date,
-.scratch-card:not(.is-cleared) .muhurtham-band {
+.scratch-card:not(.is-cleared) .muhurtham-band > div {
   opacity: 0;
-  transform: translateY(16px);
-  filter: blur(8px);
   pointer-events: none;
 }
 
-.scratch-card.is-cleared .scratch-date,
-.scratch-card.is-cleared .muhurtham-band {
-  opacity: 1;
-  transform: none;
-  filter: none;
+.scratch-card.is-cleared .scratch-date {
+  animation: revealBounce .8s cubic-bezier(.34, 1.56, .64, 1) forwards;
 }
+
+.scratch-card.is-cleared .muhurtham-band > div {
+  animation: revealBounce .8s cubic-bezier(.34, 1.56, .64, 1) forwards;
+}
+
+.scratch-card.is-cleared .muhurtham-band > div:nth-child(1) { animation-delay: 0.1s; }
+.scratch-card.is-cleared .muhurtham-band > div:nth-child(2) { animation-delay: 0.2s; }
+.scratch-card.is-cleared .muhurtham-band > div:nth-child(3) { animation-delay: 0.3s; }
 
 .scratch-hint {
   position: absolute;
@@ -697,6 +694,23 @@ h2,
   cursor: pointer;
   white-space: nowrap;
   font-size: .95rem;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 .scratch-canvas {
@@ -807,15 +821,28 @@ h2,
   color: var(--primary);
 }
 
+@keyframes revealBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  60% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity .8s cubic-bezier(.16, 1, .3, 1), transform .8s cubic-bezier(.16, 1, .3, 1);
 }
 
 .reveal.is-visible {
-  opacity: 1;
-  transform: none;
+  animation: revealBounce .8s cubic-bezier(.34, 1.56, .64, 1) forwards;
 }
 
 .hint-mobile {

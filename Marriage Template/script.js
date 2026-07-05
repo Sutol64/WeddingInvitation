@@ -24,15 +24,20 @@
   });
 
   // Scroll reveal
+  const revealElements = Array.from(document.querySelectorAll('.reveal'));
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
+        const index = revealElements.indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('is-visible');
+        }, index * 100);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  revealElements.forEach((el) => observer.observe(el));
 
   // Countdown
   document.querySelectorAll('[data-countdown]').forEach((countdown) => {
@@ -73,7 +78,20 @@
   document.querySelectorAll('[data-scratch-card]').forEach((card) => {
     const revealButtons = card.querySelectorAll('.desktop-reveal');
     revealButtons.forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (e) => {
+        // Add ripple
+        const btn = e.currentTarget;
+        const circle = document.createElement("span");
+        const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+        const radius = diameter / 2;
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${e.clientX - btn.getBoundingClientRect().left - radius}px`;
+        circle.style.top = `${e.clientY - btn.getBoundingClientRect().top - radius}px`;
+        circle.classList.add("ripple");
+        btn.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+        
+        // Existing logic
         card.classList.add('is-cleared');
         button.setAttribute('aria-expanded', 'true');
       });
