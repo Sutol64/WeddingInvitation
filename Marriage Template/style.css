@@ -362,9 +362,8 @@ span {
 
 .deity-outline {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
   width: min(74vw, 680px);
   height: min(92vh, 860px);
   z-index: 0;
