@@ -97,4 +97,13 @@
       });
     });
   });
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      setTimeout(() => {
+        preloader.style.display = 'none';
+      }, 2000);
+    }
+  });
+
 })();
