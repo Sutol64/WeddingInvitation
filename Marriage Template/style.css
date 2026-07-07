@@ -1030,6 +1030,10 @@ h2,
   .map-card iframe {
     min-height: 260px;
   }
+  
+  .section {
+    padding: clamp(1rem, 2vw, 2rem) 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1048,6 +1052,7 @@ h2,
     animation: none;
   }
 }
+
 /*------------------------------------------------------------------
     LOADER 
 -------------------------------------------------------------------*/
@@ -1059,115 +1064,104 @@ h2,
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.5); /* Blurred background */
-    backdrop-filter: blur(5px); /* Apply blur effect */
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 11000;
     position: fixed;
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.pulse {
-  height: 150px;
-  width: 200px;
-  overflow: hidden;
-  position: relative; /* Changed to relative for centering heart icon */
-  margin: auto;
-}
-.pulse:after {
-  content: '';
-  display: block;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200px 100px" enable-background="new 0 0 200px 100px" xml:space="preserve"><polyline fill="none" stroke-width="3px" stroke="#b8860b" points="2.4,58.7 70.8,58.7 76.1,46.2 81.1,58.7 89.9,58.7 93.8,66.5 102.8,22.7 110.6,78.7 115.3,58.7 126.4,58.7 134.4,54.7 142.4,58.7 197.8,58.7 "/></svg>') 0 0 no-repeat; /* Golden pulse line */
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  -webkit-animation: 2s pulse linear infinite;
-  animation: 2s pulse linear infinite;
-    clip: rect(0, 0, 100px, 0);
-}
-.pulse:before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  left: 2px;
-  right: 2px;
-  bottom: 0;
-  top: 16px;
-  margin: auto;
-  height: 3px;
-
+.loader-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
 }
 
-
-@-webkit-keyframes pulse {
-  0% {
-    clip: rect(0, 0, 100px, 0);
-    opacity: 0.4;
-  }
-  4% {
-    clip: rect(0, 66.66667px, 100px, 0);
-    opacity: 0.6;
-  }
-  15% {
-    clip: rect(0, 133.33333px, 100px, 0);
-    opacity: 0.8;
-  }
-  20% {
-    clip: rect(0, 300px, 100px, 0);
-     opacity: 1;
-  }
-
-  80% {
-    clip: rect(0, 300px, 100px, 0);
-     opacity:0;
-  }
-
-  90% {
-    clip: rect(0, 300px, 100px, 0);
-    opacity: 0;
-  }
-
-  100% {
-    clip: rect(0, 300px, 100px, 0);
-    opacity:0;
- }
-}
-@keyframes pulse {
-  0% {
-    clip: rect(0, 0, 100px, 0);
-  }
-  4% {
-    clip: rect(0, 66.66667px, 100px, 0);
-  }
-  15% {
-    clip: rect(0, 133.33333px, 100px, 0);
-  }
-  20% {
-    clip: rect(0, 300px, 100px, 0);
-     opacity:1;
-  }
-
-  80% {
-    clip: rect(0, 300px, 100px, 0);
-     opacity:0;
-  }
-
-  90% {
-    opacity: 0;
-  }
-
-  100% {
-    clip: rect(0, 300px, 100px, 0);
-    opacity:0;
- }
-  
+.heart-pulse {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.pulse {
-	text-align : center;
+.heart-pulse i {
+    color: #e63946;
+    font-size: 72px;
+    filter: drop-shadow(0 0 20px rgba(230, 57, 70, 0.4));
+    animation: heartBeat 1.2s ease-in-out infinite;
 }
-.pulse i{
-	color: var(--gold); /* Golden heart icon */
-	font-size: 38px;
+
+.heart-glow {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(230, 57, 70, 0.25) 0%, transparent 70%);
+    animation: glowPulse 1.2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glowPulse {
+    0% { transform: scale(0.8); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0.6; }
+}
+
+/* Pulse line (ECG style) */
+.pulse-line-track {
+    width: 200px;
+    height: 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pulse-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.pulse-path {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: drawPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes drawPulse {
+    0% {
+        stroke-dashoffset: 400;
+    }
+    50% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: -400;
+    }
+}
+
+/* Mobile footer padding reduction */
+@media (max-width: 640px) {
+    .footer-inner {
+        padding: 0.5rem 0.8rem !important;
+        gap: 0.3rem;
+    }
+    .footer-inner h3,
+    .footer-inner p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
 }
