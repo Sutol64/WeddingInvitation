@@ -1121,7 +1121,7 @@ h2,
     100% { transform: scale(0.8); opacity: 0.6; }
 }
 
-/* Pulse line (ECG style) */
+/* Pulse line (ECG style) – starts a bit to the right */
 .pulse-line-track {
     width: 200px;
     height: 24px;
@@ -1136,20 +1136,20 @@ h2,
 }
 
 .pulse-path {
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
     animation: drawPulse 2.5s ease-in-out infinite;
 }
 
 @keyframes drawPulse {
     0% {
-        stroke-dashoffset: 400;
+        stroke-dashoffset: 440;
     }
     50% {
         stroke-dashoffset: 0;
     }
     100% {
-        stroke-dashoffset: -400;
+        stroke-dashoffset: -440;
     }
 }
 
