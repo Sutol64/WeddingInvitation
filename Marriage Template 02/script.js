@@ -58,59 +58,33 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealElements.forEach(el => revealObserver.observe(el));
 
-  // ─── COUNTDOWN RING ─────────────────────────────────────────
+  // ─── COUNTDOWN ───────────────────────────────────────────────
   const countdownEl = document.querySelector('[data-countdown]');
   if (countdownEl) {
     const target = new Date(countdownEl.dataset.countdown).getTime();
-    const ring = countdownEl.querySelector('.ring-progress');
-    const units = {
-      days: countdownEl.querySelector('[data-unit="days"]'),
-      hours: countdownEl.querySelector('[data-unit="hours"]'),
-      minutes: countdownEl.querySelector('[data-unit="minutes"]'),
-      seconds: countdownEl.querySelector('[data-unit="seconds"]')
-    };
-    const circumference = 2 * Math.PI * 68;
-    countdownEl._startTime = Date.now();
-    countdownEl._totalMs = Math.max(1, target - countdownEl._startTime);
-
-    const update = () => {
-      const now = Date.now();
-      let diff = Math.max(0, target - now);
-      const days = Math.floor(diff / 86400000);
-      diff -= days * 86400000;
-      const hours = Math.floor(diff / 3600000);
-      diff -= hours * 3600000;
-      const minutes = Math.floor(diff / 60000);
-      diff -= minutes * 60000;
-      const seconds = Math.floor(diff / 1000);
-
-      const values = { days, hours, minutes, seconds };
-      Object.keys(values).forEach(key => {
-        const el = units[key];
-        if (el) {
-          const str = String(values[key]).padStart(2, '0');
-          if (el.textContent !== str) {
-            el.textContent = str;
-            el.classList.remove('countdown-tick');
-            void el.offsetWidth;
-            el.classList.add('countdown-tick');
-            setTimeout(() => el.classList.remove('countdown-tick'), 600);
-          }
+    const units = Object.fromEntries(['days', 'hours', 'minutes', 'seconds'].map(unit => [unit, countdownEl.querySelector(`[data-unit="${unit}"]`)]));
+    const updateCountdown = () => {
+      let remaining = Math.max(0, target - Date.now());
+      const values = { days: Math.floor(remaining / 86400000) };
+      remaining -= values.days * 86400000;
+      values.hours = Math.floor(remaining / 3600000);
+      remaining -= values.hours * 3600000;
+      values.minutes = Math.floor(remaining / 60000);
+      remaining -= values.minutes * 60000;
+      values.seconds = Math.floor(remaining / 1000);
+      Object.entries(values).forEach(([unit, value]) => {
+        const element = units[unit];
+        const text = String(value).padStart(2, '0');
+        if (element && element.textContent !== text) {
+          element.textContent = text;
+          element.classList.remove('countdown-tick');
+          void element.offsetWidth;
+          element.classList.add('countdown-tick');
         }
       });
-
-      const elapsed = now - countdownEl._startTime;
-      const progress = Math.min(1, elapsed / countdownEl._totalMs);
-      const offset = circumference * (1 - progress);
-      ring.style.strokeDashoffset = offset;
-      const primaryColor = getComputedStyle(root).getPropertyValue('--primary-soft').trim() || '#1a2a5c';
-      ring.style.stroke = progress > 0.9 ? '#c0392b' : primaryColor;
     };
-
-    ring.style.strokeDasharray = circumference;
-    ring.style.strokeDashoffset = circumference;
-    update();
-    setInterval(update, 1000);
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
   }
 
   // ─── EVENTS CAROUSEL – with auto-rotate ────────────────────
@@ -249,6 +223,24 @@
     updateCarousel(false);
     startAutoRotate();
   }, 500);
+
+  // Swipe gestures for Sacred Moments on touch screens.
+  if (carousel) {
+    let touchStartX = 0;
+    carousel.addEventListener('touchstart', event => {
+      touchStartX = event.touches[0].clientX;
+      stopAutoRotate();
+    }, { passive: true });
+    carousel.addEventListener('touchend', event => {
+      const distance = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(distance) < 45) return;
+      const step = getVisibleCards();
+      const maxIndex = getMaxIndex();
+      currentIndex = distance < 0 ? Math.min(maxIndex, currentIndex + step) : Math.max(0, currentIndex - step);
+      updateCarousel();
+      pauseAndResume();
+    }, { passive: true });
+  }
 
   // ─── BLESSINGS FORM ─────────────────────────────────────────
   const form = document.getElementById('blessingForm');
