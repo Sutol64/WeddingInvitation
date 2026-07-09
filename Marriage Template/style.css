@@ -76,7 +76,7 @@ body {
     radial-gradient(circle at 10% 10%, rgba(212, 175, 55, .18), transparent 24%),
     radial-gradient(circle at 90% 18%, rgba(139, 28, 44, .14), transparent 24%),
     linear-gradient(180deg, #fffefc 0%, var(--bg) 22%, var(--bg) 100%);
-  overflow-x: clip;
+  overflow-x: visible;
 }
 
 [data-theme="dark"] body {
@@ -200,17 +200,14 @@ span {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 30;
+  z-index: 1000;
   width: 100%;
   max-width: calc(var(--content) + 1rem);
   margin: 0 auto;
   border-radius: 22px;
   background: rgba(255, 250, 245, 0.85);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-soft);
-  transform: translateZ(0); /* helps with sticky */
 }
 
 [data-theme="dark"] .site-header {
@@ -590,6 +587,8 @@ h2,
 
 .liquid-strip {
   border-radius: 20px;
+  position: sticky;
+  margin-top: 0.7rem;
 }
 
 .liquid-chip {
