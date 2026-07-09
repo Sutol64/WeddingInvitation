@@ -9,14 +9,14 @@
     if (toggle) {
       const next = mode === 'dark' ? 'light' : 'dark';
       toggle.setAttribute('aria-label', `Switch to ${next} mode`);
-      toggle.textContent = mode === 'dark' ? '☾' : '☀';
+      const icon = toggle.querySelector('.theme-icon');
+      if (icon) icon.textContent = mode === 'dark' ? '☾' : '☀';
     }
   };
 
   applyTheme(theme);
 
   toggle?.addEventListener('click', () => {
-    // small press animation
     toggle.classList.remove('is-pressed');
     void toggle.offsetWidth;
     toggle.classList.add('is-pressed');
@@ -79,7 +79,7 @@
     const revealButtons = card.querySelectorAll('.desktop-reveal');
     revealButtons.forEach((button) => {
       button.addEventListener('click', (e) => {
-        // Add ripple
+        // Ripple
         const btn = e.currentTarget;
         const circle = document.createElement("span");
         const diameter = Math.max(btn.clientWidth, btn.clientHeight);
@@ -90,13 +90,14 @@
         circle.classList.add("ripple");
         btn.appendChild(circle);
         setTimeout(() => circle.remove(), 600);
-        
-        // Existing logic
+        // Reveal
         card.classList.add('is-cleared');
         button.setAttribute('aria-expanded', 'true');
       });
     });
   });
+
+  // Preloader
   window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
@@ -106,4 +107,21 @@
     }
   });
 
+  // Back to top button
+  const backToTop = document.querySelector('[data-back-to-top]');
+  if (backToTop) {
+    const toggleVisibility = () => {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    };
+    window.addEventListener('scroll', toggleVisibility);
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    // initial check
+    toggleVisibility();
+  }
 })();
